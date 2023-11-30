@@ -1,34 +1,35 @@
 class Solution {
 public:
-    unordered_map<string,bool>dp;
-    bool helper(string &str, unordered_map<string,int>&mp, int index,string s) {
-        if(index>=str.length()) {
-            if(mp[s]==1) {
-               return true;
-            }
-            return false;
+	bool calculateWordBreak(string &s, int start, int end, unordered_map<string,int>&mp, vector<int>&dp) {
+	if(start>end) {
+		return true;
+	}
+    
+string str = "";
+bool sol = false;
+        if(dp[start]!=-1) {
+            return dp[start];
         }
-        string key = s+"-"+to_string(index);
-        // cout<<key<<endl;
-        bool ans = false;
-        if(dp.find(key) != dp.end()) {
-            return dp[key];
-        }
-        if(s!="" && mp[s]==1){
-             ans = ans | helper(str,mp,index,"");
-        }
-        s.push_back(str[index]);
-        ans= ans | helper(str,mp,index+1,s);
-        return dp[key] = ans;
-       
-    } 
-        
+	for(int k=start;k<=end;k++) {
+		str.push_back(s[k]);
+		if(mp[str]==1) {
+			sol = sol||calculateWordBreak(s,k+1,end,mp,dp);
+		}
+		if(sol) {
+			break;
+		}
+			
+			
+}
+return dp[start] = sol?1:0;
+}
     bool wordBreak(string s, vector<string>& wordDict) {
-        unordered_map<string,int>mp;
-        mp[""] = 1;
-        for(auto word: wordDict) {
-            mp[word] = 1;
-        }
-        return helper(s,mp,0,"");
+    vector<int>dp(s.length()+1,-1);
+
+       unordered_map<string,int>mp;
+	 for(auto word: wordDict) {
+		mp[word]=1;
+	 }
+	 return calculateWordBreak(s,0,s.length()-1,mp, dp);
     }
 };
