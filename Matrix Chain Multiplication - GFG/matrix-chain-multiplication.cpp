@@ -9,31 +9,30 @@ using namespace std;
 
 class Solution{
 public:
-   int helper(int start, int end, int arr[], vector< vector<int> >&memo)
-	{
-	if(start == end) {
-		return 0;
-	}
-	if(memo[start][end]!=-1) {
-		return memo[start][end];
-	}
-	int mi = INT_MAX;
-	for(int k = start; k<end;k++) {
-		int steps = arr[start-1]*arr[k]*arr[end];
-		mi = min( steps + helper(start,k,arr, memo) + helper(k+1,end,arr,memo), mi);
-	}
-	return memo[start][end] = mi;
-	}
-	
-    int matrixMultiplication(int N, int arr[])
+     int matrixMultiplication(int N, int arr[])
     {
-	if(N<=1) {
-		return 0;
+vector< vector<int> >dp(N+1, vector<int>(N+1,INT_MAX));
+for(int i=0;i<=N;i++) {
+dp[i][i] = 0;
+}
+
+for(int len = 2;len<=N-1;len++) {
+	for(int i = 1;i<N-len+1;i++) 
+{
+    int	j = i+len-1;
+	int mi = INT_MAX;
+for(int k=i;k<j;k++) {
+int steps = arr[i-1]*arr[k]*arr[j];
+mi = min(mi, dp[i][k] + dp[k+1][j] + steps);
+}
+dp[i][j] = mi;
+}
 	}
-	vector< vector<int> >memo(N, vector<int>(N,-1) );
-     return  helper(1,N-1,arr,memo);
+	return dp[1][N-1];
     }
 };
+
+
 
 
 
