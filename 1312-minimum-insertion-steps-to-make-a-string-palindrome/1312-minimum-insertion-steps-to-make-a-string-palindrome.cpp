@@ -28,27 +28,37 @@
 class Solution {
 public:		
     int minInsertions(string s) {
+		string str = s;
+reverse(str.begin(),str.end());
 		int len = s.length();
-		vector<int>curr(len+1,0);
-		vector<int>prev(len+1,0);
-           string str = s;
-		string rev_string = s;
-		reverse(rev_string.begin(),rev_string.end());
+		vector<int>dp(len+1,0);
+		int prev = 0;
         int mx = 0;
+        cout<<str<<endl;
+        cout<<s<<endl;
 		for(int i=1;i<=len;i++) {
-			for(int j=1;j<=len;j++) {
-				if(str[i-1]==rev_string[j-1]) {
-					curr[j]= 1+ prev[j-1];
-                    		
-					}
-					else {
-					curr[j] = max(prev[j],curr[j-1]);
-					}
-                    
-				}
-			prev = curr;
+			prev = 0;
+            
+		for(int j=1;j<=len;j++) {
+			int temp = dp[j];
+			if(s[i-1] == str[j-1]) {
+                
+				dp[j] = max(dp[j], 1 + prev);
+                
 			}
+			else {
+				dp[j] = max(dp[j],dp[j-1]);
+			}
+            mx = max(mx,dp[j]);
+			prev = temp;
+}
 		
-		return s.length()-prev[len];
+		
     }
+    cout<<mx<<endl;
+        return s.length()-dp[len];
+    }
+    
 };
+
+
