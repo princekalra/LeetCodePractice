@@ -47,7 +47,7 @@ public:
 				}
 			}
 		
-		return s.length()-mx;
+		return s.length()-dp[len][len];
     }
 };
 
