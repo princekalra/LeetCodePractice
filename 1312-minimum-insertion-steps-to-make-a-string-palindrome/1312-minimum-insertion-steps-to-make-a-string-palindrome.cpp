@@ -29,7 +29,8 @@ class Solution {
 public:		
     int minInsertions(string s) {
 		int len = s.length();
-		vector<vector<int> >dp(len+1,vector<int> (len+1,0));
+		vector<int>curr(len+1,0);
+		vector<int>prev(len+1,0);
            string str = s;
 		string rev_string = s;
 		reverse(rev_string.begin(),rev_string.end());
@@ -37,17 +38,17 @@ public:
 		for(int i=1;i<=len;i++) {
 			for(int j=1;j<=len;j++) {
 				if(str[i-1]==rev_string[j-1]) {
-					dp[i][j] = 1+dp[i-1][j-1];
-                    mx = max(mx,dp[i][j]);
+					curr[j]= 1+ prev[j-1];
+                    		
 					}
 					else {
-					dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
+					curr[j] = max(prev[j],curr[j-1]);
 					}
                     
 				}
+			prev = curr;
 			}
 		
-		return s.length()-dp[len][len];
+		return s.length()-prev[len];
     }
 };
-
