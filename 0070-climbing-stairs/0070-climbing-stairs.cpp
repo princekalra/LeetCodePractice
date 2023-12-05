@@ -8,9 +8,15 @@ public:
 	dp[0] = 0;
 	dp[1] = 1;
 	dp[2] = 2;
+    int prev = 2;
+    int second_prev = 1;
+    int sol = prev;
 	for(int i=3;i<=n;i++) {
-		dp[i] = (dp[i-1] + dp[i-2]);
+		sol = prev + second_prev;
+        second_prev = prev;
+        prev = sol;
+        
 	}
-	return dp[n];
+	return sol;
     }
 };
