@@ -45,7 +45,6 @@ pq.push(node(x.data,minDistance[x.data]));
 }
 int sol = -1;
 		for(int i=1;i<=n;i++) {
-            cout<<minDistance[i]<<" ";
 			sol = max(sol,minDistance[i]);
 		}
 		return sol==INT_MAX?-1:sol;
