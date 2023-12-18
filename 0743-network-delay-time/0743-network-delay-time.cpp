@@ -11,7 +11,7 @@ public:
 	};
 	struct cmp {
  		bool operator()(const node &node1, const node &node2) {
-				return node1.weight>node2.weight;
+				return node1.weight<node2.weight;
 		}
 	};
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
