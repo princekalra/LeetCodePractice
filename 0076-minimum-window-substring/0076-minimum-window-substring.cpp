@@ -21,7 +21,6 @@ public:
               
            }
             while(count==0 ){
-                // cout<<right<<endl;
                 if(minLength>(right-left+1)){
                     minLength = right-left+1;
                     lastIndex = left;
