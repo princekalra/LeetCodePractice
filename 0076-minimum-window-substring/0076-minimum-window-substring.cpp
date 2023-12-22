@@ -12,7 +12,6 @@ public:
         int count = mp.size();
         int lastIndex = 0;
         int minLength = INT_MAX;
-        // cout<<count<<endl;
         while(right<length){
            if(mp.find(s[right])!=mp.end()){
                mp[s[right]]--;
@@ -26,7 +25,6 @@ public:
                 if(minLength>(right-left+1)){
                     minLength = right-left+1;
                     lastIndex = left;
-                                        cout<<minLength<<" "<<left<<" "<<right<<endl;
 
                 }
                 if(mp.find(s[left])!=mp.end()){
