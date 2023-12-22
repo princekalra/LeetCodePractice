@@ -36,7 +36,6 @@ public:
             }
              right++;
         }
-        cout<<minLength<<endl;
         if(minLength == INT_MAX){
             return "";
         }
