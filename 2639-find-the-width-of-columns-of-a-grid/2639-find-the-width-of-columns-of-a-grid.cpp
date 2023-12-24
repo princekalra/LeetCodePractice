@@ -3,16 +3,7 @@ public:
 	int getWidth(int num){
         string str = to_string(num);
         return str.length();
-		int width = 0;
-		if(num<0){
-			width++;
-			num*=-1;
-		}
-		while(num!=0){
-			num/=10;
-			width++;
-		}
-		return width;
+		
 }		
     vector<int> findColumnWidth(vector<vector<int>>& grid) {
        int row_length = grid.size();
