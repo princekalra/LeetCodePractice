@@ -1,7 +1,6 @@
 class Solution {
 public:
     bool isPossible(vector<int>&nums, int maxOperations, int mid){
-        cout<<mid<<endl;
         for(int i=0;i<nums.size();i++)
         {
             if(nums[i]<=mid){
