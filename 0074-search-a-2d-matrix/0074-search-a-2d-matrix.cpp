@@ -6,10 +6,8 @@ public:
         high-=1;
         int row = matrix.size();
         int col = matrix[0].size();
-        cout<<low<<" "<<high<<endl;
         while(low<=high){
             int mid = (low+high)>>1;
-            cout<<mid<<endl;
             if(matrix[(mid)/col][(mid)%col]==target){
                 return true;
             }
