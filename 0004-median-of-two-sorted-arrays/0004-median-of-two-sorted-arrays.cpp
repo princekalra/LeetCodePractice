@@ -9,7 +9,6 @@ public:
         int median = (len1+len2+1)>>1;
         int low = 0;
         int  high = nums1.size();
-        cout<<median<<endl;
         while(low<=high){
             int cut1 = (low+high)>>1;
             int cut2 = median-cut1;
