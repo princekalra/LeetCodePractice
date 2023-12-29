@@ -12,14 +12,15 @@ class Solution {
 public:
     int getImportance(vector<Employee*> employees, int id) {
         unordered_map<int,Employee*>mp;
-
+        int maximum_id= 0;
         for(int i=0;i<employees.size();i++){
             mp[employees[i]->id] = employees[i];
+            maximum_id = max(employees[i]->id,maximum_id);
         }
         queue<int>q;
         q.push(id);
         int sol = 0;
-        vector<int>visited(2001,false);
+        vector<int>visited(maximum_id+1,false);
         while(q.empty() == false){
             int node = q.front();
             q.pop();
