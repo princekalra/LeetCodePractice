@@ -22,12 +22,10 @@ public:
         vector<int>visited(2001,false);
         while(q.empty() == false){
             int node = q.front();
-            cout<<node<<endl;
             q.pop();
         sol+=mp[node]->importance;
             visited[node]=true;
             for(auto x:mp[node]->subordinates){
-                cout<<x<<endl;
                 if(visited[x]==false){
                     q.push(x);
                 }
