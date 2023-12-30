@@ -1,67 +1,70 @@
-struct Node {
-    Node* links[26];
-    int cnt = 0;
-    bool contains(char key) {
-        return links[key-'a']!=NULL;
-    }
-    void put(char key) {
-        links[key-'a'] = new Node();
-    }
-    void increaseCount() {
-        cnt++;
-    }
-    int getCount() {
-        return cnt;
-    }
-    Node* get(char c) {
-        return links[c-'a'];
-    }
-};
-class Trie {
-    private:
-    Node* root;
-    
-    public:
-    Trie() {
-        root = new Node();
-    }
-    void insert(string str) {
-        Node* node = root;
-     for(int i=0;i<str.length();i++) {
-         if(!node->contains(str[i])) {
-             node->put(str[i]);
-         }
-                 node = node->get(str[i]);
-
-         node->increaseCount();
-     }
-    }
-    string findSol(string str, int sz) {
-        Node* node = root;
-        string sol = "";
-        for(int i=0;i<str.length();i++) {
-           node = node->get(str[i]);
-            if(node->getCount() == sz){
-                sol.push_back(str[i]);
-            }
-            else{
-                return sol;
-            }
-        }
-        return sol;
-    }
-    
-    
-    
-};
 class Solution {
 public:
-    string longestCommonPrefix(vector<string>& strs) {
-        Trie trie;
-        for(auto str: strs) {
-           trie.insert(str);
+    struct node{
+        int freq;
+        node* arr[26];
+        bool contains(char c){
+            return arr[c-'a']!=NULL;
         }
-        string sol = trie.findSol(strs[0], strs.size());
+        void increaseFreq(){
+            freq++;
+        }
+        int getFreq(){
+            return freq;
+        }
+        void put(char c){
+            arr[c-'a'] = new node();
+        }
+        node* next(char c){
+            return arr[c-'a'];
+        }
+    };
+    struct trie{
+        node *root;
+        trie(){
+            root = new node();
+        }
+        public:
+        void insert(string str){
+            node* r = root;
+            for(auto c:str){
+                if(!r->contains(c)){
+                    r->put(c);
+                }
+                r = r->next(c);
+                r->increaseFreq();
+            }
+        }
+        string getLongestPrefix(string str,int size){
+            node* r = root;
+            string sol = "";
+            for(auto c: str){
+                if(r->contains(c)){
+                    // cout<<"2";
+                     r = r->next(c);
+                    // cout<<r->getFreq();
+                if(r->getFreq() == size){
+                    sol.push_back(c);
+                }
+                else{
+                    break;
+                }
+                }
+                else{
+                    break;
+                }
+               
+            }
+            return sol;
+        }
+    };
+    string longestCommonPrefix(vector<string>& strs) {
+        trie t;
+        int size = strs.size();
+        for(int i=0;i<size;i++){
+            t.insert(strs[i]);
+        }
+        string sol = t.getLongestPrefix(strs[0],size);
         return sol;
     }
 };
