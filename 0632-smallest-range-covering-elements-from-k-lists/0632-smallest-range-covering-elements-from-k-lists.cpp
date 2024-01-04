@@ -11,10 +11,6 @@ public:
 	}
 	vector<int>vec(k,0);
 	vector<int>sol={0,1000000};
-        
-//         -1-(-55) => -1 + 55 => 54
-//             55-1 = 54
-            
 	while(pq.empty()==false){
 		int ele = pq.top().first;
 		int index = pq.top().second;
