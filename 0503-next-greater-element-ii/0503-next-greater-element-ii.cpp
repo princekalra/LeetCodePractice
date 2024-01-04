@@ -4,16 +4,13 @@ public:
         int len = nums.size();
         vector<int>sol(len,-1);
         stack<int>st;
-        for(int i=(2*len-1);i>=0;i--){
-            while(st.empty()==false && st.top()<=nums[i%len]){
+        for(int i=0;i<2*len;i++){
+            while(st.empty()==false && nums[st.top()]<nums[i%len]){
+                sol[st.top()] = nums[i%len];
                 st.pop();
             }
-            if(st.empty()==false){
-                sol[i%len] = st.top();
-            }
-            st.push(nums[i%len]);
+                st.push(i%len);
         }
         return sol;
     }
 };
-
