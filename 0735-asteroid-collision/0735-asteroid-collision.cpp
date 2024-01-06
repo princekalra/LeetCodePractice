@@ -9,10 +9,6 @@ public:
                 st.push(asteroid);
             }
             else{
-                if(st.empty()){
-                    sol.push_back(asteroid);
-                }
-                else{
                     bool isVanished = false;
                     while(st.empty()==false && isVanished == false){
                         int top_asteroid = st.top();
@@ -33,7 +29,7 @@ public:
                 }
             }
            
-        }
+        
         vector<int>temp;
         while(st.empty()==false){
             temp.push_back(st.top());
