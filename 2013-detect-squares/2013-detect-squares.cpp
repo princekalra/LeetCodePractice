@@ -6,7 +6,7 @@ public:
     int miy = 1001;
     int mxy = 0;
     DetectSquares() {
-        dp.resize(2005,vector<int>(2005,0));
+        dp.resize(1005,vector<int>(1005,0));
     }
     
     void add(vector<int> point) {
