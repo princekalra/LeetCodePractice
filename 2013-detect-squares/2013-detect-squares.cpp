@@ -1,6 +1,10 @@
 class DetectSquares {
 public:
 	vector<vector<int> >dp;
+    int mix = 1001;
+    int mxx=0;
+    int miy = 1001;
+    int mxy = 0;
     DetectSquares() {
         dp.resize(2005,vector<int>(2005,0));
     }
@@ -8,6 +12,10 @@ public:
     void add(vector<int> point) {
         int x = point[0];
 	int y = point[1];
+        mix = min(mix,x);
+        mxx = max(mxx,x);
+        miy = min(miy,y);
+        mxy = max(mxy,y);
 	dp[x][y]+=1;
     }
     
@@ -16,6 +24,12 @@ public:
 	int y = point[1];
 	int count = 0;
 	for(int i=1;i<=1000;i++){
+        if(x-i<mix && x+i>mxx){
+            break;
+        }
+        if(y-i<miy && y+i>mxy){
+            break;
+        }
 //upper-left
 if(x-i>=0 && y-i>=0){
 count+=(dp[x-i][y]*dp[x-i][y-i]*dp[x][y-i]);
