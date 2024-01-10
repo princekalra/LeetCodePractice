@@ -9,7 +9,7 @@ public:
         vector<int>right(len,len);
         for(int i=0;i<len;i++)
         {
-            while(st1.empty()==false && arr[st1.top()]>arr[i]){
+            while(st1.empty()==false && arr[st1.top()]>=arr[i]){
                 st1.pop();
             }
             if(!st1.empty()){
@@ -24,7 +24,7 @@ public:
             st1.pop();
         }
        for(int i=len-1;i>=0;i--){
-           while(st1.empty()==false && arr[st1.top()]>=arr[i]){
+           while(st1.empty()==false && arr[st1.top()]>arr[i]){
                st1.pop();
            }
            if(st1.empty()){
