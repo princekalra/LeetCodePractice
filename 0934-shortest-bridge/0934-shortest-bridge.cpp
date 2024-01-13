@@ -36,7 +36,6 @@ public:
 	queue<pair<int,int> >q;
 	for(int i=0;i<row_length;i++){
 		for(int j=0;j<col_length;j++){
-            cout<<grid[i][j]<<" ";
 			if(grid[i][j]==1){
 				q.push({i,j});
 			}
@@ -45,10 +44,8 @@ public:
 	int number_of_flips = -1;
 	vector<pair<int,int> >adj = {{-1,0},{1,0},{0,-1},{0,1}};
 	while(q.empty() == false){
-        cout<<"!";
 		int size = q.size();
 		number_of_flips++;
-        // cout<<number_of_flips;
 		while(size--){
 		int row = q.front().first;
 		int col = q.front().second;
