@@ -21,9 +21,7 @@ public:
                 if(matrix[i][j]==1)
                 matrix[i][j] += min({left,up,diagonal});
                 count+=matrix[i][j];
-                // cout<<matrix[i][j]<<" ";
             }
-            cout<<endl;
         }
         return count;
     }
