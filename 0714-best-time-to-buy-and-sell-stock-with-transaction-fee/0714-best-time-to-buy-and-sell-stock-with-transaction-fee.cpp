@@ -43,16 +43,20 @@ public:
     int maxProfit(vector<int>& prices, int fee) {
         vector< vector<int> >dp(prices.size()+1,vector<int>(2,0));
         int len = prices.size();
+        int lastBuy = 0;
+        int lastSell = 0;
         for(int i=len-1;i>=0;i--){
             for(int buy =0;buy<=1;buy++){
                 if(buy==0){
-                    dp[i][buy] = max(dp[i+1][buy], -1*prices[i] + dp[i+1][1]);
+                    dp[i][buy] = max(dp[i+1][buy], -1*prices[i] + lastSell);
                 }
                 else{
-                    dp[i][buy] = max(dp[i+1][buy], -1*fee + prices[i] + dp[i+1][0]);
+                    dp[i][buy] = max(dp[i+1][buy], -1*fee + prices[i] + lastBuy);
                 }
             }
+            lastBuy = dp[i][0];
+            lastSell = dp[i][1];
         }
-        return dp[0][0];
+        return lastBuy;
     }
 };
