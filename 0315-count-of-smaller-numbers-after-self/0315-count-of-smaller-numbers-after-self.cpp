@@ -1,64 +1,53 @@
 class Solution {
 public:
-    void merge(vector<pair<int,int> >&numbers,vector<int>&sol,int low,int mid,int high){
+    void merge(vector<pair<int,int>>&nums,int low, int mid, int high, vector<int>&sol){
         int left = low;
         int right = mid;
-        int count= 0;
-        vector<pair<int,int> >merged_array;
+        vector<pair<int,int> >vec(high-low+1);
         int index = 0;
+        int cnt = 0;
         while(left<mid && right<=high){
-            if(numbers[left].first<=numbers[right].first){
-               int a = numbers[left].first;
-                int b = numbers[left].second;
-                merged_array.push_back({a,b});
-                sol[numbers[left].second]+=(count);
+            if(nums[left].first<=nums[right].first){
+                sol[nums[left].second] += cnt;
+                vec[index++] = nums[left];
                 left++;
             }
-            else
-            {
-                int a = numbers[right].first;
-                int b = numbers[right].second;
-                                merged_array.push_back({a,b});
-
+            else{
+                cnt++;
+                vec[index++] = nums[right];
                 right++;
-                count++;
             }
         }
         while(left<mid){
-           int a = numbers[left].first;
-          int b = numbers[left].second;
-             merged_array.push_back({a,b});
-            sol[numbers[left].second]+=(count);
+            sol[nums[left].second]  += cnt;
+            vec[index++] = nums[left];
             left++;
         }
         while(right<=high){
-           int a = numbers[right].first;
-            int b = numbers[right].second;
-            merged_array.push_back({a,b});
+            vec[index++] = nums[right];
             right++;
         }
-        for(int i=low;i<=high;i++){
-            numbers[i].first = merged_array[i-low].first;
-            numbers[i].second = merged_array[i-low].second;
+        for(int i = low;i<=high;i++){
+            nums[i] = vec[i-low];
         }
         
     }
-    void merge_sort(vector<pair<int,int> >&numbers, vector<int>&sol, int low, int high){
-        if(low>=high){
-            return ;
+    void mergeSort(vector<pair<int,int>>&nums, int low, int high,vector<int>&sol){
+        if(low<high){
+            int mid = (low+high)>>1;
+            mergeSort(nums,low,mid,sol);
+            mergeSort(nums,mid+1,high,sol);
+            merge(nums,low,mid+1,high,sol);
         }
-        int mid = (low+high)>>1;
-        merge_sort(numbers,sol,low,mid);
-        merge_sort(numbers,sol,mid+1,high);
-        merge(numbers,sol,low,mid+1,high);
     }
     vector<int> countSmaller(vector<int>& nums) {
-        vector<pair<int,int> >numbers;
-        for(int i=0;i<nums.size();i++){
-            numbers.push_back({nums[i],i});
+        vector<pair<int,int> >vec;
+        int length_num = nums.size();
+        vector<int>sol(length_num,0);
+        for(int i=0;i<length_num;i++){
+            vec.push_back({nums[i],i});
         }
-        vector<int>sol(nums.size(),0);
-        merge_sort(numbers,sol,0,nums.size()-1);
-            return sol;
+        mergeSort(vec,0,length_num-1,sol);
+        return sol;
     }
 };
